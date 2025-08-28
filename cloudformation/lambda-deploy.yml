@@ -28,10 +28,10 @@ Resources:
       Handler: app.lambda_handler
       Role: !GetAtt LambdaExecutionRole.Arn
       Code:
-        S3Bucket: !Ref DeploymentBucket
+        S3Bucket: cicd-lamba-falguni
         S3Key: lambda.zip
       Runtime: python3.9
       Timeout: 10
 
-  DeploymentBucket:
-    Type: AWS::S3::Bucket
+  # DeploymentBucket: //Because I added lambda.zip file in the bucket I created manually,so no need to create bucket using cloudformation
+  #   Type: AWS::S3::Bucket

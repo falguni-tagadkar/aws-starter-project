@@ -23,8 +23,7 @@ Resources:
                   - iam:PassRole
                   - lambda:*
                   - ec2:*
-                Resource:
-                  - !GetAtt CodeBuildServiceRole.Arn
+                Resource: "*"   
 
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
