@@ -1,5 +1,6 @@
 def lambda_handler(event, context):
-    return {
-        'statusCode': 200,
-        'body': 'Hello from Lambda!'
-    }
+    raise Exception("Test error to trigger CloudWatch alarm")
+    # return {
+    #     'statusCode': 200,
+    #     'body': 'Hello from Lambda!'
+    # }

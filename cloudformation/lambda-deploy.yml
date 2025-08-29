@@ -60,7 +60,7 @@ Resources:
   AlarmTopicSubscription:
     Type: AWS::SNS::Subscription
     Properties:
-      Endpoint: "falgunitagadkar@gmail.com"   # 👈 Replace with your email
+      Endpoint: "falgunitagadkar@gmail.com"   
       Protocol: "email"
       TopicArn: !Ref AlarmTopic
 
