@@ -33,5 +33,36 @@ Resources:
       Runtime: python3.9
       Timeout: 10
 
+  LambdaErrorAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: !Sub "${AWS::StackName}-LambdaErrorAlarm"
+      AlarmDescription: "Alarm if Lambda function throws errors"
+      Namespace: "AWS/Lambda"
+      MetricName: "Errors"
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref LambdaFunction
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      AlarmActions:
+        - !Ref AlarmTopic
+      TreatMissingData: notBreaching
+
+  AlarmTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: !Sub "${AWS::StackName}-AlarmTopic"
+
+  AlarmTopicSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: "falgunitagadkar@gmail.com"   # 👈 Replace with your email
+      Protocol: "email"
+      TopicArn: !Ref AlarmTopic
+
   # DeploymentBucket: //Because I added lambda.zip file in the bucket I created manually,so no need to create bucket using cloudformation
   #   Type: AWS::S3::Bucket
